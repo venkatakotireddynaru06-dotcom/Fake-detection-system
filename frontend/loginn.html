@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login - Fake News Detector</title>
+
+  <!-- Google Font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --ok: #2ecc71;
+      --bad: #e74c3c;
+      --glass: rgba(0, 0, 0, 0.25);
+      --glassBorder: rgba(255, 255, 255, 0.1);
+      --text: #eee;
+      --bg1: #1a1a1a;
+      --bg2: #2c2c2c;
+      --bg3: #3d3d3d;
+      --bg4: #111;
+      --bg5: #222;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      margin: 0;
+      color: var(--text);
+      overflow-x: hidden;
+      height: 100vh;
+      background: linear-gradient(
+        135deg,
+        var(--bg1),
+        var(--bg2),
+        var(--bg3),
+        var(--bg4),
+        var(--bg5)
+      );
+      background-size: 300% 300%;
+      animation: orangeFlow 12s ease infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    @keyframes orangeFlow {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .orb {
+      position: fixed;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      filter: blur(60px);
+      z-index: 0;
+      animation: float 8s infinite ease-in-out alternate;
+    }
+
+    .orb.o1 {
+      top: 8%;
+      left: 12%;
+      background: radial-gradient(circle, orange, transparent 70%);
+    }
+
+    .orb.o2 {
+      bottom: 10%;
+      right: 18%;
+      background: radial-gradient(circle, black, transparent 70%);
+    }
+
+    .orb.o3 {
+      top: 40%;
+      right: 5%;
+      background: radial-gradient(circle, white, transparent 70%);
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(0);
+      }
+      to {
+        transform: translateY(-25px);
+      }
+    }
+
+    .card {
+      position: relative;
+      z-index: 2;
+      background: var(--glass);
+      border: 1px solid var(--glassBorder);
+      border-radius: 20px;
+      padding: 32px 36px;
+      max-width: 400px;
+      width: 100%;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+      text-align: center;
+      color: var(--text);
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 28px;
+      margin-bottom: 24px;
+      font-weight: 600;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 6px;
+      text-align: left;
+      font-weight: 600;
+      color: #ddd;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: none;
+      margin-bottom: 20px;
+      font-size: 15px;
+      outline: none;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-family: inherit;
+      box-sizing: border-box;
+      transition: background 0.3s;
+    }
+
+    input[type="email"]::placeholder,
+    input[type="password"]::placeholder {
+      color: #ccc;
+    }
+
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #ff7e00, #ff9500);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      transition: transform 0.2s;
+      margin-top: 12px;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+    }
+
+    .forgot-password {
+      margin-top: 16px;
+      font-size: 14px;
+      color: #ccc;
+      cursor: pointer;
+      text-decoration: underline;
+      display: inline-block;
+    }
+
+    .forgot-password:hover {
+      color: #ff9500;
+    }
+  </style>
+</head>
+<body>
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+
+  <div class="card">
+    <h1>Login to Fake News Detector</h1>
+    <form id="loginForm" onsubmit="handleLogin(event)">
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="you@example.com" required />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Your password" required />
+
+      <button type="submit">Login</button>
+    </form>
+    <a href="#" class="forgot-password" onclick="alert('Reset password link sent!')">Forgot password?</a>
+  </div>
+
+  <script>
+    function handleLogin(event) {
+      event.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (!email || !password) {
+        alert("Please fill in both email and password.");
+        return;
+      }
+
+      // Example simple check (can be replaced by real auth)
+      // For demo, accept any non-empty email/password
+      alert(`Logging in as ${email}`);
+
+      // Redirect to the fake news detector page (index.html)
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>
